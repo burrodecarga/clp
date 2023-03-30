@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('medicine_user', function (Blueprint $table) {
+            $table->dropForeign(['patient_id']);
             $table->renameColumn('patient_id', 'user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,9 +31,14 @@ return new class extends Migration
     public function down()
     {
         Schema::table('medicine_user', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
             $table->renameColumn('user_id', 'patient_id');
+            $table->foreign('patient_id')
+            	->references('id')
+            	->on('users')
+            	->onDelete('cascade');
         });
+    }
 
-     }
 };
 
