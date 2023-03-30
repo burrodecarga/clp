@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-$table->string('active');
-$table->string('presentation');
-$table->string('via');
-$table->string('company');
+$table->string('active')->nullable();
+$table->string('presentation')->nullable();
+$table->string('via')->nullable();
+$table->string('company')->nullable();
 
             $table->timestamps();
         });
